@@ -19,10 +19,7 @@ app = Flask(__name__)
 api_url = 'https://api.tjournal.ru/v1.9/comment/add'
 
 def send_reminder(post_data):
-    print('########################################################')
-    print('########################################################')
     r = requests.post(api_url, data=post_data, headers={'X-Device-Token': f'{API_KEY}'})
-    print(r.json())
 
 dates_dict = {
     # 'day': 'days',
@@ -51,7 +48,6 @@ def webhook():
             try:
                 if len(comment) == 2 and datetime.strptime(comment[1], '%d/%m/%Y') > date_time:
                     time_delta = datetime.strptime(comment[1], '%d/%m/%Y')
-                    print('First')
                     sched.add_job(send_reminder, 'date', run_date=time_delta, args=[post_data])
             except TypeError:
                 pass
