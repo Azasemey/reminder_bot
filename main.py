@@ -3,7 +3,7 @@ import os
 import requests
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from apscheduler.schedulers.background import BackgroundScheduler, BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 API_KEY = os.getenv('API_KEY')
@@ -12,21 +12,20 @@ jobstores = {
 }
 
 sched = BackgroundScheduler(jobstores=jobstores)
-sched = BlockingScheduler(jobstores=jobstores)
 
 app = Flask(__name__)
 
 api_url = 'https://api.tjournal.ru/v1.9/comment/add'
 
 def send_reminder(post_data):
-    r = requests.post(api_url, data=post_data, headers={'X-Device-Token': f'{API_KEY}'})
+    requests.post(api_url, data=post_data, headers={'X-Device-Token': f'{API_KEY}'})
 
 dates_dict = {
-    # 'day': 'days',
+    'day': 'days',
     'days': 'days',
-    # 'month': 'months',
+    'month': 'months',
     'months': 'months',
-    # 'year': 'years',
+    'year': 'years',
     'years': 'years',
     'minutes': 'minutes',
     'seconds': 'seconds',
