@@ -7,7 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 API_KEY = os.environ.get('API_KEY')
-
+port = int(os.environ.get("PORT", 5000))
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs')
 }
@@ -74,5 +74,5 @@ def webhook():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=port, debug=True)
 
