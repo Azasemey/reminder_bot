@@ -7,7 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 API_KEY = os.environ.get('API_KEY')
-WEBHOOK_URL = os.environ.get('API_KEY')
+WEBHOOK_URL = os.environ.get('WEBHOOK_URL')
 port = int(os.environ.get("PORT", 5000))
 
 def sign_to_comments():
