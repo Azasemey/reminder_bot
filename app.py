@@ -46,7 +46,9 @@ dates_dict = {
     'year': 'years',
     'years': 'years',
     'hour': 'hours',
-    'hours': 'hours'
+    'hours': 'hours',
+    'minute': 'minutes',
+    'minutes': 'minutes',
 }
 
 @app.route('/', methods=['GET'])
