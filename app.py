@@ -34,6 +34,8 @@ dates_dict = {
     'months': 'months',
     'year': 'years',
     'years': 'years',
+    'hour': 'hours',
+    'hours': 'hours'
 }
 
 @app.route('/', methods=['GET'])
