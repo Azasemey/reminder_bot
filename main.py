@@ -36,6 +36,9 @@ dates_dict = {
     'years': 'years',
 }
 
+@app.rout('/', methods=['GET'])
+def welcome_message():
+    return '<h1>You are not welcome here</h1>'
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
