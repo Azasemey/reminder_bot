@@ -7,7 +7,18 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
 API_KEY = os.environ.get('API_KEY')
+WEBHOOK_URL = os.environ.get('API_KEY')
 port = int(os.environ.get("PORT", 5000))
+
+def sign_to_comments():
+    webhook_url = 'https://api.tjournal.ru/v1.8/webhooks/add'
+    data = {
+        "url": WEBHOOK_URL,
+        "event": "new_comment",
+    }
+    requests.post(webhook_url, data=data,
+                  headers={'X-Device-Token': API_KEY})
+
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs')
 }
@@ -19,7 +30,7 @@ app = Flask(__name__)
 api_url = 'https://api.tjournal.ru/v1.9/comment/add'
 
 def send_reminder(post_data):
-    requests.post(api_url, data=post_data, headers={'X-Device-Token': f'{API_KEY}'})
+    requests.post(api_url, data=post_data, headers={'X-Device-Token': API_KEY})
 
 
 def error_logs(comment_url):
@@ -77,4 +88,4 @@ def webhook():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port, debug=True)
-
+    sign_to_comments()
