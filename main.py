@@ -36,7 +36,7 @@ dates_dict = {
     'years': 'years',
 }
 
-@app.rout('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def welcome_message():
     return '<h1>You are not welcome here</h1>'
 
